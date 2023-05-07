@@ -1,0 +1,15 @@
+<div class="flex-container">
+  <h1 *ngIf="raceData" (click)="incrementRound()">
+    {{ raceData.raceName }}
+  </h1>
+  <!-- <h3 *ngIf="raceData" (click)="decrementRound()">
+    <br>
+    <div *ngFor="let item of sessionTimes | keyvalue : returnZero">
+      {{item.key}}  {{item.value}}
+    </div>
+    Race {{ raceTime }}
+  </h3> -->
+  <app-timetable (click)="decrementRound()" [raceTime]="raceTime" [nextSessionTime]="nextSessionTime"></app-timetable>
+  <app-flag [countryCode]="countryCode"></app-flag>
+  <my-map *ngIf="raceData" [raceData]="raceData" (countryCode)="setCountryCode($event)"></my-map>
+</div>

@@ -1,0 +1,9 @@
+<div class="map-container">
+  <div *ngIf="mapReady" class="map"
+    leaflet
+    [leafletLayers]="options.layers"
+    [leafletOptions]="options"
+    (leafletMapReady)="onMapReady($event)"
+  ></div>
+</div>
+  
