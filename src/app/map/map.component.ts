@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'my-map',
   templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css',
+  styleUrls: ['./map.component.scss',
   '../../../node_modules/leaflet/dist/leaflet.css'],
 })
 export class MapComponent {
@@ -45,7 +45,6 @@ export class MapComponent {
       this.map.setView(new Leaflet.LatLng(this.centerpoint[0], this.centerpoint[1]));
     }
     this.mapReady = true;
-    this.onMapReady(this.map);
     this.firstRace = false;
   }
 

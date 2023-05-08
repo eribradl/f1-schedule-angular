@@ -1,2 +1,4 @@
-<h3 *ngIf="nextSessionTime">Next: {{ nextSessionTime }}</h3>
-<h3>Race: {{ raceTime }}</h3>
+<h5 *ngFor="let session of sessionTimes | keyvalue : returnZero">
+    {{session.key}}: {{session.value}}
+</h5>
+<h5>Race: {{ raceTime }}</h5>

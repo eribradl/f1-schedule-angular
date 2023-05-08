@@ -1,19 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbAccordionModule } from '@ng-bootstrap/ng-bootstrap';
+import { CommonModule } from '@angular/common';
 import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular-api-call';
+  title = 'f1-schedule-angular';
   fullData: any = null;
   raceData: any = null;
   currentlyDisplayedRound: number = 0;
   raceTime: any = null;
+  allSessionTimes: any = {};
   sessionTimes: any = {};
-  nextSessionTime: string = "";
+  nextSessionTime: any = {};
   countryCode: string = "";
 
   constructor(private api:ApiService) {}
@@ -44,7 +47,8 @@ export class AppComponent {
   updateRound() {
     this.raceData = null
     this.api.getRaceByRound(this.currentlyDisplayedRound).subscribe((data)=> {
-      this.sessionTimes = {};
+      this.allSessionTimes = {};
+      this.nextSessionTime = {};
       this.fullData = data;
       this.raceData = this.fullData.MRData.RaceTable.Races[0];
       this.getSessionTimes();
@@ -59,7 +63,6 @@ export class AppComponent {
 
   getSessionTimes() {
     this.raceTime = this.formatDateTime(this.raceData.date, this.raceData.time);
-    this.nextSessionTime = "";
     var keyList = Object.keys(this.raceData);
     var sessionKeys = keyList.slice(keyList.indexOf('time')+1);
     sessionKeys.forEach((key) => {
@@ -67,16 +70,30 @@ export class AppComponent {
       var date = this.raceData[key].date;
       var sessionTime = this.formatDateTime(date, time);
       var sessionTimeLongFormat = new Date(`${date}T${time}`);
-      //console.log(this.raceTime.getTime() > Date.now())
-      if (this.nextSessionTime === "" && sessionTimeLongFormat.getTime() > Date.now()){
-        this.nextSessionTime = sessionTime;
-        console.log(this.nextSessionTime)
+      if (Object.entries(this.nextSessionTime).length === 0 && sessionTimeLongFormat.getTime() > Date.now()){
+        this.nextSessionTime[key]=sessionTime;
+        this.sessionTimes[key]=sessionTime;
       }
-      this.sessionTimes[key] = sessionTime;
+      this.allSessionTimes[key] = sessionTime;
     })
   }
 
-  returnZero() {     return 0;     }
+  addSessionTimes() {
+    this.sessionTimes = this.allSessionTimes;
+  }
+
+  removeSessionTimes() {
+    this.sessionTimes = this.nextSessionTime;
+  }
+
+  onClick(event: any) {
+    var midX = window.innerWidth/2
+    if (midX - event.clientX > (200)) {
+      this.decrementRound()
+    } else if (midX - event.clientX < (-200)){
+      this.incrementRound()
+    }
+  }
 
   setCountryCode(countryCode: string) {
     this.countryCode = countryCode;
