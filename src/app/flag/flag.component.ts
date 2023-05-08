@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-flag',
   templateUrl: './flag.component.html',
-  styles: ['img { width: 300px }']
+  styles: ['img { max-width: 200px; width: 50vw; }']
 })
 export class FlagComponent {
   @Input() countryCode: string = "";

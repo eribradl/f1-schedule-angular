@@ -10,13 +10,7 @@
     <div ngbAccordionItem class = "bg-secondary text-light" ngbAccordionToggle>
       <app-flag [countryCode]="countryCode"></app-flag>
       <div ngbAccordionCollapse>
-        <div ngbAccordionBody>
-          <ng-template>
-            Facts about country here
-            <br>
-            More Country info and Records
-          </ng-template>
-        </div>
+        Facts about country here
       </div>
     </div> 
     <div ngbAccordionItem class = "bg-dark text-light p-3 rounded" ngbAccordionToggle (shown)="addSessionTimes()" (hidden)="removeSessionTimes()">
@@ -27,13 +21,7 @@
     <div ngbAccordionItem class = "bg-secondary text-light" ngbAccordionToggle>
       <my-map [raceData]="raceData" (countryCode)="setCountryCode($event)"></my-map>
       <div ngbAccordionCollapse>
-        <div ngbAccordionBody>
-          <ng-template>
-            Facts about circuit here
-            <br>
-            More Circuit info and Records
-          </ng-template>
-        </div>
+        Facts about circuit here
       </div>
     </div> 
   </div>
