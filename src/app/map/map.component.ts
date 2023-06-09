@@ -23,7 +23,7 @@ export class MapComponent {
 
 
   ngOnChanges() {
-    this.api.getGeoJson(this.raceData.round).subscribe((json: any) => {
+    this.api.getGeoJson(this.raceData.Circuit.circuitId).subscribe((json: any) => {
       this.geoJson = json;
       this.countryCode.emit(json.name.substring(0,2));
       this.centerpoint[1] = (this.geoJson.bbox[0] + this.geoJson.bbox[2]) / 2
