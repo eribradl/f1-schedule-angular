@@ -7,6 +7,9 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
 
   constructor(private http:HttpClient) { }
+
+  public countryCode: string = "";
+  public geoJson: any;
   
   private geoJsonIds: {[circuitId:string]: string} = {
     "bahrain": "bh-2002",

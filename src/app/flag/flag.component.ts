@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-flag',
@@ -6,13 +7,10 @@ import { Component, Input } from '@angular/core';
   styles: ['img { max-width: 200px; width: 50vw; }']
 })
 export class FlagComponent {
-  @Input() countryCode: string = "";
   flagSource: string = "";
+  constructor(private api: ApiService) {}
 
-  ngOnChanges() {
-    this.flagSource = `https://flagcdn.com/${this.countryCode}.svg`
-  }
-  
+  ngOnInit() {
+    this.flagSource = `https://flagcdn.com/${this.api.countryCode}.svg`
+  }  
 }
-
-

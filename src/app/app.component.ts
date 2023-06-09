@@ -26,6 +26,11 @@ export class AppComponent {
       this.fullData = data;
       this.raceData = this.fullData.MRData.RaceTable.Races[0];
       this.currentlyDisplayedRound = parseInt(this.raceData.round);
+      this.api.getGeoJson(this.raceData['Circuit']['circuitId'])
+      .subscribe((geoJson: any) => {
+        this.api.countryCode = (geoJson.name.substring(0,2));
+        this.api.geoJson = geoJson;
+      })
       this.getSessionTimes();
     })
   }
