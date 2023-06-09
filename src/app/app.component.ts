@@ -19,7 +19,7 @@ export class AppComponent {
   nextSessionTime: any = {};
   countryCode: string = "";
 
-  constructor(private api:ApiService) {}
+  constructor(public api:ApiService) {}
 
   ngOnInit() {
     this.api.getNextRace().subscribe((data)=> {
